@@ -55,8 +55,11 @@ while ($row = $list->fetch()) {
   $category_name[$row['category_id']] = $row['category'];
   $total[$row['category_id']] ++;
   $done[$row['category_id']] += $row['finished_date'] ? 1 : 0;
+  $overall['total']++;
+  if ($row['finished_date']) {
+    $overall['done']++;
+  }
 }
-
 
 $list->reset();
 
@@ -88,6 +91,7 @@ if (!$list->num_rows && $_GET['load']) {
 .well{text-align:center}
 .btn-group{position:relative;top:-6px}
 li .fa-remove,li .fa-pencil{display:none}
+meter{width:100%}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -139,6 +143,20 @@ $(function(){
 <?php require_once 'include.header.php'; ?>
 
 <h1>Checklist <?php echo $info->name ?></h1>
+
+<span>
+<?php echo (int)($overall['done']/$overall['total']*100) ?>%
+completed
+</span>
+<meter 
+  max="<?php echo $overall['total'] ?>" 
+  low="1"
+  high="1"
+  optimum="1"
+  value="<?php echo $overall['done'] ?>"
+>
+<?php echo $overall['done']/$overall['total']*100 ?>%
+</meter>
 
 <?php if ($print) { echo "<div class=\"alert alert-success\">$print</div>"; } ?>
 
