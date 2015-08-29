@@ -1,0 +1,5 @@
+docs/*
+config.php
+config.online.php
+conn/local.openstreets.php
+conn/online.openstreets.php
