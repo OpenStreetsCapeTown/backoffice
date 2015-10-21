@@ -63,6 +63,16 @@ while ($row = $list->fetch()) {
 
 $list->reset();
 
+// Let's also get those categories with no items in it yet.
+$categories = $db->query("SELECT * FROM planning_categories 
+  WHERE NOT EXISTS(SELECT * FROM planning_checklist WHERE category = planning_categories.id AND event = $id)");
+
+while ($row = $categories->fetch()) {
+  $category_name[$row['id']] = $row['name'];
+}
+
+$categories->reset();
+
 if (!$list->num_rows && $_GET['load']) {
  $db->query("INSERT INTO planning_checklist (
    category, name, position, type, event
@@ -79,6 +89,9 @@ if (!$list->num_rows && $_GET['load']) {
 <title>Checklist | <?php echo $info->name ?> | <?php echo SITENAME ?></title>
 <?php echo $head ?>
 <style type="text/css">
+.fade{opacity:0.5}
+.fade .well{min-height:60px}
+.fade:hover{opacity:1}
 .checklist ul{list-style:none;margin:0 0 40px 0;padding:0}
 .checklist ul ul{list-style:none;margin:0 0 0 30px;padding:0;font-size:13px;opacity:0.56}
 .checklist .regular .fa-check{opacity:0.3}
@@ -249,6 +262,23 @@ completed
       </li>
     <?php $category = $row['category']; } ?>
   </ul>
+
+  <?php while ($row = $categories->fetch()) { ?>
+    <div class="fade">
+      <h2 id="cat<?php echo $row['id'] ?>"><?php echo $row['name'] ?></h2>
+      <div class="well">
+        <span class="items pull-left">
+          <strong>0</strong> items found.
+        </span>
+        <div class="btn-group pull-right">
+          <a class="btn btn-default plus" href="event.checklist.item.php?event=<?php echo $id ?>&amp;category=<?php echo $row['id'] ?>"><i class="fa fa-plus"></i></a>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+
+
+
 </div>
 
 <div class="modal fade" id="done" tabindex="-1" role="dialog" aria-labelledby="mlabel">

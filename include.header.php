@@ -55,6 +55,7 @@
                 <li><a href="info/mailinglists">Mailing Lists</a></li>
                 <li><a href="standard/tags">Tags</a></li>
                 <li><a href="preferences.catalogue.php">Preferences</a></li>
+                <li><a href="checklist/template">Checklist</a></li>
               </ul>
             </li>
           </ul>
