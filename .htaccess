@@ -278,6 +278,7 @@ FileETag None
   RewriteRule ^preference/(.+)/?$ preferences.options.php?type=$1
   RewriteRule ^info/(.+)/?$ $1.php
   RewriteRule ^signup/?$ confirmcall.php
+  RewriteRule ^404/?$ 404.php
   RewriteRule ^report/(.+)/([0-9]+)?$ report.$1.php?id=$2
   RewriteRule ^cms/(.+)/?$ cms.$1.php
   RewriteRule ^survey/results/([0-9]+)/?$ survey.results.php?id=$1

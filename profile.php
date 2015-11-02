@@ -24,6 +24,12 @@ FROM people
   LEFT JOIN organization_types ON people.organization_type = organization_types.id
 WHERE people.id = $id");
 
+if (!$info->num_rows) {
+  header("HTTP/1.0 404 Not Found");
+  header("Location: " . URL . "404");
+  exit();
+}
+
 $surveys = $db->query("SELECT surveys.id, surveys.date, survey_list.name FROM surveys
   JOIN survey_list ON surveys.survey = survey_list.id
 WHERE surveys.people = $id");
