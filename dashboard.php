@@ -25,8 +25,7 @@ $name = $db->query("SELECT screenname FROM openid_users WHERE id = " . OPENID_US
 <p>
   <a href="people.php" class="btn btn-primary btn-lg">Add contact</a>
   <a href="people/search" class="btn btn-primary btn-lg">Search</a>
-  <a href="events/dashboard/16" class="btn btn-primary btn-lg">Belville Dashboard</a>
-  <a href="events/dashboard/19" class="btn btn-primary btn-lg">Langa Dashboard</a>
+  <a href="events/dashboard/38" class="btn btn-primary btn-lg">Mitchells Plain</a>
 </p>
 
 <?php require_once 'include.footer.php'; ?>
