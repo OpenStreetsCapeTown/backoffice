@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("Africa/Johannesburg");
 
-define ("CONNECTION", "/path/to/connection/connection.openstreets.php"); // See sample in conn folder
+define ("CONNECTION", "/path/to/connections/connection.openstreets.php"); // See sample in conn folder
 define ("URL", "http://localhost/openstreets/");
 define ("LOCAL", true); // or FALSE when in production
 define ("PRODUCTION", false); // or TRUE when local
