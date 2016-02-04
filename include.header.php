@@ -2,7 +2,7 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="info/dashboard">Open Streets Database</a>
+          <a class="navbar-brand" href="info/dashboard"><?php echo SITENAME ?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
