@@ -21,4 +21,16 @@ define ("MAILCHIMP_LIST", 'list-id-from-mailchimp');
 
 $client_id = 'google-id-for-google-API.apps.googleusercontent.com';
 $client_secret = 'client-secret-provided-by-google-api';
+
+// The following script let's you login LOCALLY on your development machine without 
+// having to go through the OpenID login process. You will be logged in as user ID 1
+// (or change it to any other user). You can disable this functionality below.
+
+$auto_login = true;
+
+if (defined("LOCAL") && LOCAL && $auto_login) {
+  define("OPENID_USERID", 1);
+  $_COOKIE["openid_session"] = true;
+}
+
 ?>
