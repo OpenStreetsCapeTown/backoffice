@@ -1,7 +1,11 @@
 <?php
+// Fill out these settings and rename this to config.php
+// The config.php file is ignored by git (see .gitignore) so 
+// your private data won't be included in the repository. 
+
 date_default_timezone_set("Africa/Johannesburg");
 
-define ("CONNECTION", "/path/to/connections/connection.openstreets.php"); // See sample in conn folder
+define ("CONNECTION", "/path/to/connections/connection.php"); // See sample in connection folder
 define ("URL", "http://localhost/openstreets/");
 define ("LOCAL", true); // or FALSE when in production
 define ("PRODUCTION", false); // or TRUE when local

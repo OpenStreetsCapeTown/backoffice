@@ -7,7 +7,7 @@ require_once 'functions.php';
 if ($_GET['action'] == "logout") {
 	$print = _("You have been logged out");
 } else {
-	openid_validate();
+  openid_validate();
 }
 
 if (LOCAL) {

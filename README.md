@@ -36,8 +36,8 @@ To run this on your own machine, take the following steps:
 - Rename 'config.sample.php' to 'config.php'
 - Open 'config.php' and change the variables and constants to match your environment
 - For a development machine, the only really required constants are the PATH, URL and CONNECTION settings
-- In your connection script make sure you configure your database name, username, and password (sample settings are included in connections/connection.openstreets.php)
-
+- In your connection script make sure you configure your database name, username, and password (sample settings are included in connections/connection.sample.php)
+- Save your connection file as connection.php (or give it any other name, but just make sure you refer to this file in the config.php file)
 
 # Use this for your own organization
 
