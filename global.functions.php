@@ -21,8 +21,6 @@ $files = "============== FILES VARIABLES ============ \n".
 $cookies = "============ COOKIE VARIABLES =========== \n".
 (($_COOKIE) ? print_r($_COOKIE, true) . "\n\n": $cookies ="NO COOKIES\n\n");
 
-$sql=(mysql_error()) ? "================ SQL ERROR ================ \n".mysql_error() : '';
-
 $backtrace="================== PHP DEBUG ================ \n".print_r(debug_backtrace(),true); 
 
 $lasterror="============== PHP LAST ERROR ============ \n".print_r(error_get_last(),true);
@@ -66,67 +64,9 @@ $lasterror="============== PHP LAST ERROR ============ \n".print_r(error_get_las
 
 } 
 
-if (!function_exists("kill")) {
 function kill($description=false, $type='norecord') {
-	global $basedir, $external_server, $sysadmin_email;
-	$basedir = defined("BASEDIR") ? BASEDIR : URL;
-	if (!$sysadmin_email) {
-	  $sysadmin_email = SYSADMIN;
-	}
 
-	/* Following types exist: 
-	1: No Record, used when a MySQL record is requested but does not exist. 
-	2: Spam, used when spam terms are used in sending a form
-	3: MySQL Error, used when a Query does not run properly
-	4: Mail Injection
-	8: Other Critical Errors
-	9: Other non-critical Errors
-	*/
-	
-	$convert_type = array(
-	  'norecord' => 1,
-	  'onpage' => 9,
-	  'inline' => 9,
-	  '404' => 1,
-	  'spam' => 2,
-	  'mysql' => 3,
-	  'other' => 9,
-	  'mail injection' => 4,
-	  'critical' => 8,
-	);
-
-	// Only log this in central db when in production, and when not working on an external, 
-	// non-IBIS server
-
-	if (!file_exists("/sites/local") && !$external_server) {
-	  require '/home/global/crons/conn/online.logs.php';
-	  $db = new DB(SERVER_LOGS, USER_LOGS, PASSWORD_LOGS, DATABASE_LOGS, "mailerror");
-
-	  $post = array(
-		'type' => $convert_type[$type] ? (int)$convert_type[$type] : 4,
-		'description' => html($description),
-		'website' => mysql_clean($basedir),
-		'url' => mysql_clean('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']),
-		'post' => mysql_clean(getinfo("post")),
-		'cookies' => mysql_clean(getinfo("cookies")),
-		'files' => mysql_clean(getinfo("files")),
-		'referer' => mysql_clean($_SERVER['HTTP_REFERER']),
-		'browser' => mysql_clean($_SERVER['HTTP_USER_AGENT']),
-		'path' => mysql_clean($_SERVER['SCRIPT_FILENAME']),
-		'ip' => mysql_clean($_SERVER["REMOTE_ADDR"]),
-	  );
-
-	  // MySQL errors should be sent immediately; the other errors are grouped and sent through a 
-	  // cron when a certain number of errors is reached
-	  if ($type == 'mysql' || $type == "critical") {
-		mail($sysadmin_email, "MySQL Error - $basedir", $description . "\n\n" . getinfo(), "From:" . EMAIL);
-		$post['sent'] = 1;
-	  }
-
-	  $db->insert("errors",$post, false, 'mailerror');
-	} elseif ($external_server) {
-	  mail($sysadmin_email, "Registered Error - $basedir", $description . "\n\n" . getinfo(), "From:" . EMAIL);
-	}
+  // You may want to define your own error handling system here.
 
 	switch ($type) {
 
@@ -146,18 +86,18 @@ function kill($description=false, $type='norecord') {
 		break;
 
 	  default:
-	  // Set this condition to whatever ensures you are working locally
-		if (file_exists("/sites/local")) {
-		  header("HTTP/1.0 404 Not Found");
-		  echo '<p><strong>' . nl2br($description) .'</strong></p>' . nl2br(getinfo());
-		  die();
-		} else {
+
+    if (PRODUCTION) {
+      // If in production, show an error page and no further insight.
 		  header("HTTP/1.0 404 Not Found");
 		  header("Location: {$basedir}error.php");
 		  die();
+		} else {
+		  header("HTTP/1.0 404 Not Found");
+		  echo '<p><strong>' . nl2br($description) .'</strong></p>' . nl2br(getinfo());
+		  die();
 		}
 	 }
-}
 }
 
 //OPTIMIZED OCT 2010 FOR NOT OPENING CONNECTION PROBLEM
