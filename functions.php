@@ -41,7 +41,7 @@ $head .= '<script src="js/modernizr.2.7.1.js"></script>';
 
 $head .= PRODUCTION ? 
   '<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>' :
-  '<script src="http://e/js/jq.2.1.0.js"></script>';
+  '<script src="js/jq.2.1.0.js"></script>';
 
 $head .= '<script src="js/bootstrap.js"></script>';
 
