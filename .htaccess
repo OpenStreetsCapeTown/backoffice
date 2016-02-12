@@ -248,7 +248,6 @@ FileETag None
 # Turning on the rewrite engine is necessary for the following rules and
 # features. FollowSymLinks must be enabled for this to work.
 
-<IfModule mod_rewrite.c>
   Options +FollowSymlinks
   RewriteEngine On
   RewriteRule ^(info|edit|segment|delete)/(.+)/([0-9]+)?$ $2.php?id=$3&action=$1
@@ -282,7 +281,6 @@ FileETag None
   RewriteRule ^report/(.+)/([0-9]+)?$ report.$1.php?id=$2
   RewriteRule ^cms/(.+)/?$ cms.$1.php
   RewriteRule ^survey/results/([0-9]+)/?$ survey.results.php?id=$1
-</IfModule>
 
 
 # ----------------------------------------------------------------------
