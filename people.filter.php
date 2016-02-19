@@ -184,8 +184,18 @@ if (is_array($_POST['event'])) {
   foreach ($_POST['event'] as $key => $value) {
     $explode = explode(".", $value);
     $event = (int)$explode[0];
-    $relationship = (int)$explode[1];
-    $exists .= "EXISTS (SELECT * FROM people_events WHERE people = people.id AND event = $event AND relationship = $relationship) OR ";
+    $exists .= "EXISTS (SELECT * FROM people_events WHERE people = people.id AND event = $event) OR ";
+  }
+  $exists = substr($exists, 0, -3);
+  $exists .= ") $selector ";
+}
+
+if (is_array($_POST['event_relationship'])) {
+  $exists .= "( ";
+  foreach ($_POST['event_relationship'] as $key => $value) {
+    $explode = explode(".", $value);
+    $relationship = (int)$explode[0];
+    $exists .= "EXISTS (SELECT * FROM people_events WHERE people = people.id AND relationship = $relationship) OR ";
   }
   $exists = substr($exists, 0, -3);
   $exists .= ") $selector ";
@@ -213,7 +223,7 @@ $sql .= $exists ? " AND (" . substr($exists, 0, -4) . ")" : '';
 
 $types = $db->query("SELECT * FROM types WHERE active = TRUE ORDER BY name");
 $skills = $db->query("SELECT * FROM skills WHERE active = TRUE ORDER BY name");
-$events = $db->query("SELECT * FROM events WHERE active = TRUE ORDER BY name");
+$events = $db->query("SELECT * FROM events WHERE active = TRUE ORDER BY date DESC");
 $event_relationships = $db->query("SELECT * FROM event_relationships WHERE active = TRUE ORDER BY name");
 $tags = $db->query("SELECT * FROM tags_options WHERE active = TRUE ORDER BY name");
 $mailinglist = $db->query("SELECT * FROM mailinglist_options WHERE active = TRUE ORDER BY name");
@@ -228,6 +238,10 @@ if ($sql) {
 
 if (!$_POST['event']) {
   $_POST['event'] = array();
+}
+
+if (!$_POST['event_relationship']) {
+  $_POST['event_relationship'] = array();
 }
 
 if (!$_POST['type']) {
@@ -316,18 +330,22 @@ td.short,th.short{width:70px}
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2 control-label">Event link</label>
+    <label class="col-sm-2 control-label">Event</label>
     <div class="col-sm-10">
       <select class="form-control" name="event[]" multiple size="5">
       <?php while ($row = $events->fetch()) { ?>
-        <optgroup label="<?php echo $row['name'] ?>">
-        <?php while ($subrow = $event_relationships->fetch()) { ?>
-          <option value="<?php echo $row['id'] ?>.<?php echo $subrow['id'] ?>" 
-            <?php if (in_array("{$row['id']}.{$subrow['id']}", $_POST['event'])) { echo ' selected'; } ?>>
-              <?php echo $subrow['name'] ?>
-            </option>
-        <?php } $event_relationships->reset(); ?>
-        </optgroup>
+          <option value="<?php echo $row['id'] ?>"<?php if (in_array($row['id'], $_POST['event'])) { echo ' selected'; } ?>><?php echo $row['name'] ?></option>
+      <?php } ?>
+      </select>
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label class="col-sm-2 control-label">Event Relationship</label>
+    <div class="col-sm-10">
+      <select class="form-control" name="event_relationship[]" multiple size="5">
+      <?php while ($row = $event_relationships->fetch()) { ?>
+          <option value="<?php echo $row['id'] ?>"<?php if (in_array($row['id'], $_POST['event_relationship'])) { echo ' selected'; } ?>><?php echo $row['name'] ?></option>
       <?php } ?>
       </select>
     </div>
