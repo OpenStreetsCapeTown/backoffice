@@ -12,13 +12,13 @@ $name = $db->query("SELECT screenname FROM openid_users WHERE id = " . OPENID_US
 
 <?php require_once 'include.header.php'; ?>
 
-<h1>Open Streets Database</h1>
+<h1>Open Streets Motherboard</h1>
 
 <div class="alert alert-info">
   Welcome, <?php echo $name->screenname ?>
 </div>
 
-<p>Use the navigation menu to browse the Open Streets Database.</p>
+<p>Use the navigation menu to browse the Open Streets Motherboard.</p>
 
 <h2>Quick Links</h2>
 
