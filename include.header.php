@@ -14,7 +14,7 @@
                 <li><a href="people/search">Search</a></li>
                 <li><a href="people/list">List</a></li>
                 <li><a href="people/filter">Filters</a></li>
-                <li><a href="people/segments">Segments</a></li>
+                <!-- <li><a href="people/segments">Segments</a></li> -->
               </ul>
             </li>
             <li class="dropdown">
@@ -22,6 +22,13 @@
               <ul class="dropdown-menu">
                 <li><a href="events/list">List</a></li>
                 <li><a href="info/event">Add</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mailing Lists <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="people/segments">Segments</a></li>
+                <li><a href="info/mailinglists">Options</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -37,7 +44,7 @@
                 <li><a href="standard/skills">Skills</a></li>
                 <li><a href="standard/event">Events</a></li>
                 <li><a href="standard/types">Relationship types</a></li>
-                <li><a href="standard/donations">Fundraising events</a></li>
+                <!-- <li><a href="standard/donations">Fundraising events</a></li> -->
                 <li><a href="standard/referral">Referral sources</a></li>
                 <li><a href="standard/eventrelationships">Event relationships</a></li>
                 <li><a href="standard/organizationmaintypes">Main organization types</a></li>
@@ -52,7 +59,7 @@
                 <li><a href="standard/os_communication">OS Communication Options</a></li>
 -->
                 <li><a href="standard/whiteboard">Whiteboard Categories</a></li>
-                <li><a href="info/mailinglists">Mailing Lists</a></li>
+                <!-- <li><a href="info/mailinglists">Mailing Lists</a></li> -->
                 <li><a href="standard/tags">Tags</a></li>
                 <li><a href="preferences.catalogue.php">Preferences</a></li>
                 <li><a href="checklist/template">Checklist</a></li>
