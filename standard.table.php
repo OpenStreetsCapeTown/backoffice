@@ -59,11 +59,11 @@ switch ($_GET['table']) {
     $label = 'Relationship Types';
     $table_prefix = "";
     break;
-  case 'donations':
-    $table = 'donation_events';
-    $label = 'Fundraising Events';
-    $table_prefix = "";
-    break;
+  // case 'donations':
+  //   $table = 'donation_events';
+  //   $label = 'Fundraising Events';
+  //   $table_prefix = "";
+  //   break;
   case 'referral':
     $table = 'referral_sources';
     $label = 'Referral';
