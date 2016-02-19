@@ -54,9 +54,9 @@ if ($_POST) {
           $post['address'] = html($_POST['street'][$key]);
           $print[$key] .= "Address was updated.<br />";
         }
-        if ($_POST['phone'][$key]) {
-          $post['phone'] = html($_POST['phone'][$key]);
-          $print[$key] .= "Phone was updated.<br />";
+        if ($_POST['cell'][$key]) {
+          $post['cell'] = html($_POST['cell'][$key]);
+          $print[$key] .= "Mobile phone was updated.<br />";
         }
         if ($_POST['comments'][$key]) {
           $_POST['comments'] = 'CONCAT(comments, ' . html("\n" . $_POST['comments'][$key]) . ')';
@@ -73,7 +73,7 @@ if ($_POST) {
           'lastname' => html($_POST['lastname'][$key]),
           'organization' => html($_POST['organization'][$key]),
           'address' => html($_POST['street'][$key]),
-          'phone' => html($_POST['phone'][$key]),
+          'cell' => html($_POST['cell'][$key]),
           'email' => html($_POST['email'][$key]),
           'comments' => html($_POST['comments'][$key]),
         );
@@ -168,7 +168,7 @@ $(function(){
       <th>Organisation</th>
       <th>Street</th>
       <th>E-mail</th>
-      <th>Phone</th>
+      <th>Mobile Phone</th>
       <th>Notes</th>
     </tr>
     <?php for ($i = 1; $i <= 20; $i++) { ?>
@@ -178,7 +178,7 @@ $(function(){
         <td><input type="text" name="organization[]" class="form-control" /></td>
         <td><input type="text" name="address[]" class="form-control" /></td>
         <td><input type="email" name="email[]" class="form-control" /></td>
-        <td><input type="text" name="phone[]" placeholder="000 000 0000" class="form-control" /></td>
+        <td><input type="text" name="cell[]" placeholder="000 000 0000" class="form-control" /></td>
         <td><input type="text" name="notes[]" class="form-control" /></td>
       </tr>
     <?php } ?>
