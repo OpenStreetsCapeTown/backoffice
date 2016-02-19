@@ -62,7 +62,7 @@ WHERE people_mailinglists.people = $id ORDER BY mailinglist_options.name");
 $events = $db->query("SELECT events.name, events.date, events.id
 FROM event_attendance a 
 JOIN events ON a.event = events.id
-WHERE a.people = $id ORDER BY events.date");
+WHERE a.people = $id ORDER BY events.date DESC");
 
 $skills = $db->query("SELECT skills.name 
 FROM people_skills 
@@ -240,7 +240,7 @@ $(function(){
   <?php } ?>
 </div>
 
-<div class="panel panel-default">
+<!-- <div class="panel panel-default">
   <div class="panel-heading">
     <a href="people.preferences.php?id=<?php echo $id ?>" class="btn btn-default right">Edit</a>
     <h3 class="panel-title">Preferences</h3>
@@ -257,7 +257,7 @@ $(function(){
       </dl>
     </div>
   <?php } ?>
-</div>
+</div> -->
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -294,7 +294,7 @@ $(function(){
 <div class="panel panel-default">
   <div class="panel-heading">
     <a href="people.mailinglist.php?id=<?php echo $id ?>" class="btn btn-default right">Edit</a>
-    <h3 class="panel-title">Mailinglist(s)</h3>
+    <h3 class="panel-title">Mailing List(s)</h3>
   </div>
   <?php if ($mailinglists->num_rows) { ?>
     <div class="panel-body">
@@ -310,7 +310,7 @@ $(function(){
 <div class="panel panel-default">
   <div class="panel-heading">
     <a href="event.contactlink.php?return=profile&amp;contact=<?php echo $id ?>" class="btn btn-default right">Edit</a>
-    <h3 class="panel-title">Event relationship(s)</h3>
+    <h3 class="panel-title">Event Relationship(s)</h3>
   </div>
   <?php if ($event_links->num_rows) { ?>
     <div class="panel-body">
