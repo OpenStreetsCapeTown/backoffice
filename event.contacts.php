@@ -48,6 +48,8 @@ ORDER BY people.firstname, people.lastname, people.organization, people.email");
     <th>ID</th>
     <th>Name</th>
     <th>Organisation</th>
+    <th>Email</th>
+    <th>Cell Phone</th>
     <th colspan="2">Details</th>
   </tr>
 <?php while ($row = $list->fetch()) { ?>
@@ -55,6 +57,8 @@ ORDER BY people.firstname, people.lastname, people.organization, people.email");
     <td><a href="people/<?php echo $row['id'] ?>"><?php echo $row['id'] ?></a></td>
     <td><?php echo ($row['firstname'] || $row['lastname'] || $row['organization']) ? $row['firstname'] . " " . $row['lastname'] : $row['email']; ?></td>
     <td><?php echo $row['organization'] ?></td>
+    <td><?php echo ($row['email']) ?></td>
+    <td><?php echo ($row['cell']) ?></td>
     <td><?php echo $row['comments'] ?></td>
     <td>
       <a href="event.contactlink.php?event=<?php echo $id ?>&amp;contact=<?php echo $row['id'] ?>">

@@ -31,7 +31,7 @@ if ($_POST) {
     'cell' => html($_POST['cell']),
     'affiliation' => html($_POST['affiliation']),
     'age' => $_POST['age'] ? (int)$_POST['age'] : "NULL",
-    'referral' => $_POST['referral'] ? (int)$_POST['referral'] : "NULL",
+    //'referral' => $_POST['referral'] ? (int)$_POST['referral'] : "NULL",
     'active_mailings' => (int)$_POST['active_mailings'],
     'suburb' => $_POST['suburb'] ? (int)$_POST['suburb'] : "NULL",
     'organization_type' => $_POST['organization_type'] ? (int)$_POST['organization_type'] : "NULL",
@@ -238,7 +238,7 @@ $(function(){
       </div>
     </div>
 
-    <div class="form-group">
+<!--      <div class="form-group">
       <label class="col-sm-2 control-label">Referral</label>
       <div class="col-sm-10">
         <select name="referral" class="form-control">
@@ -248,7 +248,7 @@ $(function(){
           <?php } ?>
         </select>
       </div>
-    </div>
+    </div> -->
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Comments</label>

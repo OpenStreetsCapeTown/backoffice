@@ -10,6 +10,12 @@ if ($_POST) {
   $print = "Notes were saved";
 }
 
+if ($_GET['active']) {
+  $id = (int)$_GET['id'];
+  $active=$_GET['active'];
+  $db->query("UPDATE events SET active = $active WHERE id = $id");
+}
+
 $info = $db->query("SELECT * FROM events WHERE id = $id");
 
 $linked = $db->query("SELECT 
@@ -46,6 +52,9 @@ footer{margin-top:30px}
 <?php require_once 'include.header.php'; ?>
 
 <div class="jumbotron">
+  <p>
+    <?php if ($info->active == FALSE) { echo "This event has been archived"; } ?>
+  </p>
   <h1>
     <i class="fa fa-dashboard"></i>
     Dashboard
@@ -97,6 +106,11 @@ footer{margin-top:30px}
         </a>
       </p>
       <p class="movedown"><a href="people/search/<?php echo $id ?>" class="btn btn-primary">Add Contacts</a></p>
+      <?php if ($info->active == TRUE) { ?>
+        <a href="event.dashboard.php?id=<?php echo $id ?>&amp;active=false" onclick="javascript:return confirm('Are you sure?')" class="btn btn-warning right">Archive Event</a>
+      <?php } else { ?>
+        <a href="event.dashboard.php?id=<?php echo $id ?>&amp;active=true" onclick="javascript:return confirm('Are you sure?')" class="btn btn-warning right">Unarchive Event</a>
+      <?php } ?>
     </section>
   
     <section class="col-md-4">

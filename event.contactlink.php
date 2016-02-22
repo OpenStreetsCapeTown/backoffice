@@ -39,7 +39,7 @@ $id = (int)$_GET['id'];
 if ($id) {
   $details = $db->query("SELECT * FROM people_events WHERE id = $id");
 }
-$events = $db->query("SELECT * FROM events WHERE active = 1 ORDER BY name");
+$events = $db->query("SELECT * FROM events WHERE active = 1 ORDER BY date DESC");
 
 if ($_GET['event'] && !$details->event) {
   $details->event = (int)$_GET['event'];
@@ -119,6 +119,14 @@ if ($_GET['event'] && !$details->event) {
   </div>
 
 </form>
+
+<?php 
+$event_id = $_GET['event'];
+if ($event_id != 0) {
+?>
+<a href="events/dashboard/<?php echo $_GET['event'] ?>">Back to Event</a>
+
+<?php ; } ?>
 
 <?php require_once 'include.footer.php'; ?>
 
