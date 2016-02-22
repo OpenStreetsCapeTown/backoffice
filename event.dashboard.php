@@ -10,9 +10,8 @@ if ($_POST) {
   $print = "Notes were saved";
 }
 
-if ($_GET['active']) {
-  $id = (int)$_GET['id'];
-  $active=$_GET['active'];
+if (isset($_GET['active'])) {
+  $active = (int)$_GET['active'];
   $db->query("UPDATE events SET active = $active WHERE id = $id");
 }
 
@@ -106,10 +105,10 @@ footer{margin-top:30px}
         </a>
       </p>
       <p class="movedown"><a href="people/search/<?php echo $id ?>" class="btn btn-primary">Add Contacts</a></p>
-      <?php if ($info->active == TRUE) { ?>
-        <a href="event.dashboard.php?id=<?php echo $id ?>&amp;active=false" onclick="javascript:return confirm('Are you sure?')" class="btn btn-warning right">Archive Event</a>
+      <?php if ($info->active) { ?>
+        <a href="event.dashboard.php?id=<?php echo $id ?>&amp;active=0" onclick="javascript:return confirm('Are you sure?')" class="btn btn-warning right">Archive Event</a>
       <?php } else { ?>
-        <a href="event.dashboard.php?id=<?php echo $id ?>&amp;active=true" onclick="javascript:return confirm('Are you sure?')" class="btn btn-warning right">Unarchive Event</a>
+        <a href="event.dashboard.php?id=<?php echo $id ?>&amp;active=1" onclick="javascript:return confirm('Are you sure?')" class="btn btn-warning right">Unarchive Event</a>
       <?php } ?>
     </section>
   

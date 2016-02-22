@@ -120,13 +120,9 @@ if ($_GET['event'] && !$details->event) {
 
 </form>
 
-<?php 
-$event_id = $_GET['event'];
-if ($event_id != 0) {
-?>
-<a href="events/dashboard/<?php echo $_GET['event'] ?>">Back to Event</a>
-
-<?php ; } ?>
+<?php if ($event) { ?>
+  <a href="events/dashboard/<?php echo $event ?>">Back to Event</a>
+<?php } ?>
 
 <?php require_once 'include.footer.php'; ?>
 
