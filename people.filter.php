@@ -143,7 +143,7 @@ if ($_POST['email_required']) {
   $sql .= "email != '' AND active_mailings = 1 AND ";
 }
 
-if (is_array($_POST['type'])) {
+if (is_array($_POST['type']) && count($_POST['type'])) {
   $in = false;
   foreach ($_POST['type'] as $key => $value) {
     $in .= (int)$value . ",";
@@ -152,7 +152,7 @@ if (is_array($_POST['type'])) {
   $exists .= $in ? "EXISTS (SELECT * FROM people_types WHERE people = people.id AND type IN ($in)) $selector " : '';
 }
 
-if (is_array($_POST['skills'])) {
+if (is_array($_POST['skills']) && count($_POST['skills'])) {
   $in = false;
   foreach ($_POST['skills'] as $key => $value) {
     $in .= (int)$value . ",";
@@ -161,7 +161,7 @@ if (is_array($_POST['skills'])) {
   $exists .= $in ? "EXISTS (SELECT * FROM people_skills WHERE people = people.id AND skill IN ($in)) $selector " : '';
 }
 
-if (is_array($_POST['subscription'])) {
+if (is_array($_POST['subscription']) && count($_POST['subscription'])) {
   $in = false;
   foreach ($_POST['subscription'] as $key => $value) {
     $in .= (int)$value . ",";
@@ -170,7 +170,7 @@ if (is_array($_POST['subscription'])) {
   $exists .= $in ? "EXISTS (SELECT * FROM people_preferences WHERE people = people.id AND preference IN ($in)) $selector " : '';
 }
 
-if (is_array($_POST['mailinglist'])) {
+if (is_array($_POST['mailinglist']) && count($_POST['mailinglist'])) {
   $in = false;
   foreach ($_POST['mailinglist'] as $key => $value) {
     $in .= (int)$value . ",";
@@ -179,7 +179,7 @@ if (is_array($_POST['mailinglist'])) {
   $exists .= $in ? "EXISTS (SELECT * FROM people_mailinglists WHERE people = people.id AND mailinglist IN ($in)) $selector " : '';
 }
 
-if (is_array($_POST['event'])) {
+if (is_array($_POST['event']) && count($_POST['event'])) {
   $exists .= "( ";
   foreach ($_POST['event'] as $key => $value) {
     $explode = explode(".", $value);
@@ -190,7 +190,7 @@ if (is_array($_POST['event'])) {
   $exists .= ") $selector ";
 }
 
-if (is_array($_POST['event_relationship'])) {
+if (is_array($_POST['event_relationship']) && count($_POST['event_relationship'])) {
   $exists .= "( ";
   foreach ($_POST['event_relationship'] as $key => $value) {
     $explode = explode(".", $value);
@@ -201,7 +201,7 @@ if (is_array($_POST['event_relationship'])) {
   $exists .= ") $selector ";
 }
 
-if (is_array($_POST['tags'])) {
+if (is_array($_POST['tags']) && count($_POST['tags'])) {
   $in = false;
   foreach ($_POST['tags'] as $key => $value) {
     $in .= (int)$value . ",";
@@ -209,7 +209,7 @@ if (is_array($_POST['tags'])) {
   $in = substr($in, 0, -1);
   $exists .= $in ? "EXISTS (SELECT * FROM people_tags WHERE people = people.id AND tag IN ($in)) $selector " : '';
 }
-if (is_array($_POST['suburbs'])) {
+if (is_array($_POST['suburbs']) && count($_POST['suburbs'])) {
   $in = false;
   foreach ($_POST['suburbs'] as $key => $value) {
     $in .= (int)$value . ",";
