@@ -598,17 +598,17 @@ class DB{
 
 	function __construct($server = false,$user = false,$password = false,$database = false, $action = false) {
 	if($server && $user && $password && $database && !defined('NON_STANDARD_DATABASE')) {      
-		$this->connection = new mysqli("p:".$server,$user,$password,$database);
+		$this->connection = new mysqli($server,$user,$password,$database);
 	} elseif (defined('NON_STANDARD_DATABASE')){
 		if (defined('ALT_CONNECTION')) {
 			require_once ALT_CONNECTION;
-			$this->connection = new mysqli("p:".SERVER,USER,PASSWORD,NON_STANDARD_DATABASE);          
+			$this->connection = new mysqli(SERVER,USER,PASSWORD,NON_STANDARD_DATABASE);          
 		} else {
-			$this->connection = new mysqli("p:".$server,$user,$password,NON_STANDARD_DATABASE);          
+			$this->connection = new mysqli($server,$user,$password,NON_STANDARD_DATABASE);          
 		}  
 	} elseif (defined('CONNECTION')){
 		require_once CONNECTION; 
-		$this->connection = new mysqli("p:".SERVER,USER,PASSWORD,DATABASE);          
+		$this->connection = new mysqli(SERVER,USER,PASSWORD,DATABASE);          
 	}
 	if (mysqli_connect_errno()) {  
 		if ($action == "mailerror") {

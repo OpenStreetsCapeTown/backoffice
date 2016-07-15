@@ -221,6 +221,12 @@ if (is_array($_POST['suburbs'])) {
 $sql = $sql ? "AND " . substr($sql, 0, -4) : '';
 $sql .= $exists ? " AND (" . substr($exists, 0, -4) . ")" : '';
 
+if ($_POST['sync']) {
+  // After we sync it, we don't want to show any more lists
+  $_POST['tags'] = false;
+  $sql = false;
+}
+
 $types = $db->query("SELECT * FROM types WHERE active = TRUE ORDER BY name");
 $skills = $db->query("SELECT * FROM skills WHERE active = TRUE ORDER BY name");
 $events = $db->query("SELECT * FROM events WHERE active = TRUE ORDER BY date DESC");
