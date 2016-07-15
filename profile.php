@@ -393,12 +393,14 @@ $(function(){
           <th>Date</th>
           <th>Action</th>
           <th>User</th>
+          <th>Details</th>
         </tr>
     <?php while ($row = $log->fetch()) { ?>
       <tr>
         <td><?php echo format_date("M d, Y", $row['date']) ?></td>
         <td><?php echo $row['action'] ?></td>
         <td><?php echo $row['fullname'] ?></td>
+        <td><?php echo $row['details'] ?></td>
       </tr>
     <?php } ?>
     </table>

@@ -8,7 +8,7 @@ if ($_GET['retry']) {
   $id = (int)$_GET['id'];
   $gethash = $_GET['hash'];
   $info = $db->query("SELECT * FROM people WHERE id = $id");
-  $hash = encrypt($id . $info->email);
+  $hash = substr(encrypt($id . $info->email), 0, 10);
   if ($hash != $gethash) {
     kill("Hash is invalid");
   }
@@ -52,7 +52,8 @@ if (trim($_POST['email'])) {
       $id = $db->insert_id;
       logThis(1, $id);
     }
-    logThis(11, $id);
+    $details = $_SERVER["REMOTE_ADDR"] . " // " . $_SERVER["HTTP_USER_AGENT"];
+    logThis(11, $id, false, $details);
     foreach ($_POST['list'] as $key => $value) {
       $list = (int)$key;
       $post = array(
@@ -176,7 +177,7 @@ h2 {
         </div>
 
         <p>
-          If you do not receive the e-mail within a few minutes, please <a href="newsletter.php?id=<?php echo $id ?>&amp;hash=<?php echo $hash ?>&amp;retry=1">click here</a>.
+          If you do not receive the e-mail within a few minutes, please <a href="newsletter.php?id=<?php echo $id ?>&amp;hash=<?php echo substr($hash, 0, 10) ?>&amp;retry=1">click here</a>.
         </p>
 
         <?php if ($_POST['interested']) { ?>
