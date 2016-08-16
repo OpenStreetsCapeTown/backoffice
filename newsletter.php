@@ -30,6 +30,10 @@ if ($_GET['retry']) {
 if (trim($_POST['email'])) {
   $email = mysql_clean(trim($_POST['email']));
   $user = $db->query("SELECT * FROM people WHERE email = $email LIMIT 1");
+  $check = trim(strtolower($_POST['humancheck']));
+  if ($check != "open streets") {
+    $error = "Error! Please type 'Open Streets' in the human verification box<br /> <a href='javascript:history.back(1)'>Click here to go back.</a>";
+  } 
   if ($user->num_rows) {
     $id = $user->id;
     $check = $db->query("SELECT * FROM people_mailinglists WHERE id = $id");
@@ -47,6 +51,7 @@ if (trim($_POST['email'])) {
         'email' => mysql_clean($_POST['email']),
         'firstname' => html($_POST['firstname']),
         'lastname' => html($_POST['lastname']),
+        'active' => 0,
       );
       $db->insert("people",$post);
       $id = $db->insert_id;
@@ -191,8 +196,6 @@ h2 {
           event</a>         
           </p>
 
-
-
         <?php } ?>
 
       <?php } elseif ($print) { echo "<div class=\"alert alert-success\">$print</div>"; } ?>
@@ -219,6 +222,14 @@ h2 {
             <label class="col-sm-2 control-label">Last name</label>
             <div class="col-sm-10">
               <input class="form-control" type="text" name="lastname" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Human check</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="humancheck" />
+              To prevent spam, please enter the phrase 'Open Streets' in this box
             </div>
           </div>
 
