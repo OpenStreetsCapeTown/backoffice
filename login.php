@@ -31,13 +31,6 @@ if ($_GET['state']) {
   curl_close ($ch);
   $output = json_decode($output);
   $info = $output->id_token;
-  var_dump($_POST);
-  var_dump($_GET);
-  var_dump($_COOKIE);
-  var_dump($_SESSION);
-  var_dump($info);
-  die();
-
   if (!$info) {
     $error = "Invalid token";
   } else {
@@ -63,12 +56,6 @@ if ($_GET['state']) {
       $error = "Invalid response.";
     }
   }
-  var_dump($_POST);
-  var_dump($_GET);
-  var_dump($_COOKIE);
-  var_dump($_SESSION);
-  var_dump($info);
-  die();
 } else {
   $state = md5(rand());
   $_SESSION['state'] = $state;
