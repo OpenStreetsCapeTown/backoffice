@@ -61,9 +61,6 @@ if ($_GET['state']) {
   $_SESSION['state'] = $state;
 }
 
-var_dump($_SESSION);
-die(var_dump($_COOKIE));
-
 ?>
 <!doctype html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
