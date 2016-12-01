@@ -11,7 +11,6 @@ if ($_COOKIE["openid_session"]) {
   openid_validate();
   if (defined("OPENID_USERID")) {
       define ("CMS_LOGIN", true);
-    }
   }
 }
 if (!defined("CMS_LOGIN") && !$skip_login) {
