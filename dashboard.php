@@ -26,10 +26,15 @@ $events = $db->query("SELECT * FROM events WHERE active = 1 AND date >= CURDATE(
 <p>
   <a href="people.php" class="btn btn-primary btn-lg">Add contact</a>
   <a href="people/search" class="btn btn-primary btn-lg">Search</a>
-  <?php while ($row = $events->fetch()) { ?>
-    <a href="events/dashboard/<?php echo $row['id'] ?>" class="btn btn-primary btn-lg"><?php echo $row['name'] ?></a>
-  <?php } ?>
 </p>
+
+<h2>Events</h2>
+
+<ul class="nav nav-list">
+  <?php while ($row = $events->fetch()) { ?>
+    <li><a href="events/dashboard/<?php echo $row['id'] ?>"><?php echo $row['name'] ?></a></li>
+  <?php } ?>
+</ul>
 
 <?php require_once 'include.footer.php'; ?>
 
