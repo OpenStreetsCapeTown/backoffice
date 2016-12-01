@@ -21,6 +21,7 @@ if ($_COOKIE["openid_session"]) {
 }
 if (!defined("CMS_LOGIN") && !$skip_login) {
     echo "Not found, redirecting";
+    die();
   header("Location: " . URL . "login.php");
   exit();
 }
