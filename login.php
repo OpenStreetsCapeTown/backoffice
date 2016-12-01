@@ -19,75 +19,48 @@ if (LOCAL) {
 }
 
 if ($_GET['state']) {
-  var_dump($_GET['state']);
   if ($_GET['state'] != $_SESSION['state']) {
     $error = "Invalid session";
-    echo "invalid";
   }
-    echo "test";
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL,"https://www.googleapis.com/oauth2/v3/token");
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, "code={$_GET['code']}&client_id={$client_id}&client_secret={$client_secret}&redirect_uri={$redirect}&grant_type=authorization_code&openid.realm={$realm}");
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    echo "output";
   $output = curl_exec ($ch);
-  var_dump($output);
   curl_close ($ch);
   $output = json_decode($output);
-    echo "info";
   $info = $output->id_token;
-  var_dump($info);
   if (!$info) {
     $error = "Invalid token";
     $error .= "<br />The error returned from Google was: " . $output->error . "<br />" . 
-    $output->error_description
+    $output->error_description;
   } else {
     require_once 'JWT.php';
     $final = JWT::decode($info, $client_secret, false);
     $email = $final->email;
-        echo "0<br />";
-    var_dump($final);
     if ($final->sub) {
       $link_identifier = "accounts.google.com/{$final->sub}";
-      var_dump($final->sub);
       if (openid_login($link_identifier)) {
-        var_dump($link_identifier);
-        echo "1<br />";
-        die(var_dump($_GET));
         header("Location: " . URL . "info/dashboard");
         exit();
       } elseif ($final->openid_id) {
-          var_dump($final->openid_id);
         if (openid_login($final->openid_id, $link_identifier)) {
-        echo "2<br />";
-            var_dump('yes');
-            die(var_dump($_GET));
           header("Location: " . URL . "info/dashboard");
           exit();
         } else {
           $error = "User not found.";
-            var_dump($error);
         }
       } else {
         $error = "User not found.";
-            var_dump($error);
       }
     } else {
       $error = "Invalid response.";
-            var_dump($error);
     }
   }
 } else {
   $state = md5(rand());
   $_SESSION['state'] = $state;
-            var_dump($_SESSION);
-}
-
-var_dump($_SESSION);
-var_dump($_GET);
-if (!$_GET['force']) {
-die();
 }
 
 ?>
