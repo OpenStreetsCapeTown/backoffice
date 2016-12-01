@@ -35,7 +35,7 @@ $list = $db->query("SELECT * FROM openid_users ORDER BY id");
         <th>ID</th>
         <th>Name</th>
         <th>Mail</th>
-        <th>Creation Date</th>
+        <th>Creation/reactivation Date</th>
         <th>Status</th>
         <th>Actions</th>
     </tr>
@@ -44,7 +44,7 @@ $list = $db->query("SELECT * FROM openid_users ORDER BY id");
         <td><?php echo $row['id'] ?></td>
         <td><?php echo $row['screenname'] ?></td>
         <td><?php echo $row['mail'] ?></td>
-        <td><?php echo format_date("M d, Y", $row['creation_date']) ?></td>
+        <td><?php echo $row['status'] ? format_date("M d, Y", $row['creation_date']) : ''; ?></td>
         <td><?php echo $row['status'] ? "Active" : "Inactive" ?></td>
         <td>
           <?php if ($row['status']) { ?>
