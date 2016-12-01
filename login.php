@@ -63,6 +63,7 @@ if ($_GET['state']) {
   $state = md5(rand());
   $_SESSION['state'] = $state;
   if (!$_GET['force']) {
+  var_dump($_SERVER);
   die(var_dump($_GET));
   }
 }
