@@ -40,18 +40,21 @@ if ($_GET['state']) {
     require_once 'JWT.php';
     $final = JWT::decode($info, $client_secret, false);
     $email = $final->email;
+        echo "0<br />";
     var_dump($final);
     if ($final->sub) {
       $link_identifier = "accounts.google.com/{$final->sub}";
       var_dump($final->sub);
       if (openid_login($link_identifier)) {
         var_dump($link_identifier);
+        echo "1<br />";
         die(var_dump($_GET));
         header("Location: " . URL . "info/dashboard");
         exit();
       } elseif ($final->openid_id) {
           var_dump($final->openid_id);
         if (openid_login($final->openid_id, $link_identifier)) {
+        echo "2<br />";
             var_dump('yes');
             die(var_dump($_GET));
           header("Location: " . URL . "info/dashboard");
