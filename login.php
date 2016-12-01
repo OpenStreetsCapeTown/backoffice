@@ -74,7 +74,7 @@ if ($_GET['state']) {
 }
 
 var_dump($_SESSION);
-die(var_dump($_GET));
+var_dump($_GET);
 
 ?>
 <!doctype html>
