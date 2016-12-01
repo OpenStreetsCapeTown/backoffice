@@ -32,7 +32,7 @@ if ($_POST) {
     'affiliation' => html($_POST['affiliation']),
     'age' => $_POST['age'] ? (int)$_POST['age'] : "NULL",
     //'referral' => $_POST['referral'] ? (int)$_POST['referral'] : "NULL",
-    'active_mailings' => (int)$_POST['active_mailings'],
+    'active_mailings' => $_POST['email'] ? (int)$_POST['active_mailings'] : 0,
     'suburb' => $_POST['suburb'] ? (int)$_POST['suburb'] : "NULL",
     'organization_type' => $_POST['organization_type'] ? (int)$_POST['organization_type'] : "NULL",
   );

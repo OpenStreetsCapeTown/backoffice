@@ -81,6 +81,10 @@ if ($_POST) {
         $id = $db->insert_id;
         logThis(1, $id);
         $print[$key] = "<strong>Contact <a href='people/$id'>#$id</a> added! E-mail: {$_POST['email'][$key]}.</strong><br />";
+        $has_mail = false;
+        if ($_POST['email'][$key]) {
+          $has_mail = true;
+        }
       }
       if ($event) {
         $post = array(
@@ -91,7 +95,7 @@ if ($_POST) {
         $db->insert("people_events",$post);
         logThis(16, $id);
       }
-      if ($_POST['mailing']) {
+      if ($_POST['mailing'] && $has_mail) {
         foreach ($_POST['mailing'] as $key => $list) {
           $list = (int)$list;
           // We need to make sure this person is not already subscribed
