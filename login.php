@@ -46,12 +46,14 @@ if ($_GET['state']) {
       var_dump($final->sub);
       if (openid_login($link_identifier)) {
         var_dump($link_identifier);
+        die(var_dump($_GET));
         header("Location: " . URL . "info/dashboard");
         exit();
       } elseif ($final->openid_id) {
           var_dump($final->openid_id);
         if (openid_login($final->openid_id, $link_identifier)) {
             var_dump('yes');
+            die(var_dump($_GET));
           header("Location: " . URL . "info/dashboard");
           exit();
         } else {
