@@ -240,7 +240,7 @@ h2 {
             <div class="form-group">
               <label class="col-sm-3 control-label"><?php echo $row['name'] ?></label>
               <div class="col-sm-1">
-                <input class="form-control" type="checkbox" name="list[<?php echo $row['id'] ?>]" checked value="1" />
+                <input class="form-control" type="checkbox" name="list[<?php echo $row['id'] ?>]" <?php echo $row['id'] == 1 ? "checked" : ""; ?> value="1" />
               </div>
               <div class="col-sm-8">
                 <?php echo $row['description'] ?>
@@ -249,7 +249,7 @@ h2 {
 
           <?php } ?>
 
-          <h2>Are you interested in volunteering during the upcoming Open Streets event?</h2>
+          <h2>Are you interested in volunteering at Open Streets Days?</h2>
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Yes, I am interested</label>
