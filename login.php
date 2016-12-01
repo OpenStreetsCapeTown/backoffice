@@ -73,7 +73,6 @@ if ($_GET['state']) {
             var_dump($_SESSION);
 }
 
-
 ?>
 <!doctype html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
@@ -165,7 +164,7 @@ header {
             <fieldset>
                 <div id="openid_choice">
                   <p>
-                    <a href="https://accounts.google.com/o/oauth2/auth?client_id=<?php echo $client_id ?>&response_type=code&scope=openid%20email&redirect_uri=<?php echo urlencode($redirect . "?"); ?>state=<?php echo $state ?>&openid.realm=<?php echo $realm ?>" class="btn btn-large btn-default google">
+                    <a href="https://accounts.google.com/o/oauth2/auth?client_id=<?php echo $client_id ?>&response_type=code&scope=openid%20email&redirect_uri=<?php echo $redirect ?>&state=<?php echo $state ?>&openid.realm=<?php echo $realm ?>" class="btn btn-large btn-default google">
                       <i class="fa fa-google"></i>
                       <span>
                         Log in with Google
