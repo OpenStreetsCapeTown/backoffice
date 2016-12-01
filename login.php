@@ -73,6 +73,9 @@ if ($_GET['state']) {
             var_dump($_SESSION);
 }
 
+var_dump($_SESSION);
+die(var_dump($_GET));
+
 ?>
 <!doctype html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
