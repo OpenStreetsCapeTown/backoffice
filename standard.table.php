@@ -116,7 +116,7 @@ if ($_POST) {
   exit();
 }
 
-$list = $db->query("SELECT * FROM $table_name WHERE active = 1 ORDER BY id");
+$list = $db->query("SELECT * FROM $table_name WHERE active = 1 ORDER BY name");
 
 if ($id) {
   $info = $db->query("SELECT * FROM $table_name WHERE id = $id");
