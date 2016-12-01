@@ -20,7 +20,6 @@ $list = $db->query("SELECT * FROM openid_users ORDER BY id");
         <th>Name</th>
         <th>Mail</th>
         <th>Creation Date</th>
-        <th>Last Login</th>
         <th>Status</th>
     </tr>
 <?php while ($row = $list->fetch()) { ?>
@@ -28,7 +27,6 @@ $list = $db->query("SELECT * FROM openid_users ORDER BY id");
         <td><?php echo $row['screenname'] ?></td>
         <td><?php echo $row['mail'] ?></td>
         <td><?php echo format_date("M d, Y", $row['creation_date']) ?></td>
-        <td><?php echo format_date("M d, Y", $row['last_login']) ?></td>
         <td><?php echo $row['status'] ? "Active" : "Inactive" ?></td>
     </tr>
 <?php } ?>
