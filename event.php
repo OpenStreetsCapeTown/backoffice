@@ -24,7 +24,7 @@ if ($_POST) {
 }
 
 $types = $db->query("SELECT * FROM event_types WHERE active = 1 ORDER BY name");
-$events = $db->query("SELECT * FROM events WHERE active = 1 ORDER BY name");
+$events = $db->query("SELECT * FROM events WHERE active = 1 ORDER BY date DESC");
 ?>
 <!doctype html>
 <html>
