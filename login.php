@@ -22,16 +22,20 @@ if ($_GET['state']) {
   var_dump($_GET['state']);
   if ($_GET['state'] != $_SESSION['state']) {
     $error = "Invalid session";
+    echo "invalid";
   }
+    echo "test";
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL,"https://www.googleapis.com/oauth2/v3/token");
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, "code={$_GET['code']}&client_id={$client_id}&client_secret={$client_secret}&redirect_uri={$redirect}&grant_type=authorization_code&openid.realm={$realm}");
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    echo "output";
   $output = curl_exec ($ch);
   var_dump($output);
   curl_close ($ch);
   $output = json_decode($output);
+    echo "info";
   $info = $output->id_token;
   var_dump($info);
   if (!$info) {
