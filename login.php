@@ -35,8 +35,8 @@ if ($_GET['state']) {
     $error = "Invalid token";
     $error .= "<br />The error returned from Google was: " . $output->error . "<br />" . 
     $output->error_description;
-    die();
   } else {
+    die("Checking");
     require_once 'JWT.php';
     $final = JWT::decode($info, $client_secret, false);
     $email = $final->email;
