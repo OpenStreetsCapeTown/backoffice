@@ -36,17 +36,18 @@ if ($_GET['state']) {
     $error .= "<br />The error returned from Google was: " . $output->error . "<br />" . 
     $output->error_description;
   } else {
-    die("Checking");
     require_once 'JWT.php';
     $final = JWT::decode($info, $client_secret, false);
     $email = $final->email;
     if ($final->sub) {
       $link_identifier = "accounts.google.com/{$final->sub}";
       if (openid_login($link_identifier)) {
+        die("Redirecting A");
         header("Location: " . URL . "info/dashboard");
         exit();
       } elseif ($final->openid_id) {
         if (openid_login($final->openid_id, $link_identifier)) {
+          die("Redirecting B");
           header("Location: " . URL . "info/dashboard");
           exit();
         } else {
