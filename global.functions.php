@@ -551,7 +551,7 @@ if (!defined("OPENID_TEMPLATE")) {
 	if($data){
 	  $id = (int)substr($data,128,strlen($data)-128);
 	  $login = $db->query("SELECT identities.url,users.id,users.screenname FROM openid_identities AS identities 
-	  LEFT JOIN openid_users AS users ON identities.userid = users.id WHERE identities.id = $id");
+	  LEFT JOIN openid_users AS users ON identities.userid = users.id WHERE identities.id = $id AND users.status = 1");
 	  if($login->num_rows){
 		if (defined("IPCHECK") && !IPCHECK) {
 		  $ip = $_SERVER["REMOTE_ADDR"];
