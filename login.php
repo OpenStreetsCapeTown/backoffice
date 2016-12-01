@@ -75,7 +75,9 @@ if ($_GET['state']) {
 
 var_dump($_SESSION);
 var_dump($_GET);
+if (!$_GET['force']) {
 die();
+}
 
 ?>
 <!doctype html>
