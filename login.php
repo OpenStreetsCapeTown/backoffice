@@ -42,12 +42,10 @@ if ($_GET['state']) {
     if ($final->sub) {
       $link_identifier = "accounts.google.com/{$final->sub}";
       if (openid_login($link_identifier)) {
-        die("Redirecting A");
         header("Location: " . URL . "info/dashboard");
         exit();
       } elseif ($final->openid_id) {
         if (openid_login($final->openid_id, $link_identifier)) {
-          die("Redirecting B");
           header("Location: " . URL . "info/dashboard");
           exit();
         } else {

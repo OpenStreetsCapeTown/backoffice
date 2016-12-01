@@ -9,14 +9,18 @@ define ("TAGS", "<p><strong><a><ul><li><em><ol><span><table><tr><th><td><img><h1
 if ($_COOKIE["openid_session"]) {
   require_once 'openid.php';
   openid_validate();
+  echo "Checking ID...";
   if (defined("OPENID_USERID")) {
+      echo "ID found, " . OPENID_USERID;
     $permissions = $db->query("SELECT * FROM openid_permissions WHERE openid_user = " . OPENID_USERID . " AND status = 1 LIMIT 1");
     if ($permissions->num_rows) {
       define ("CMS_LOGIN", true);
+      echo "CMS LOGIN = true";
     }
   }
 }
 if (!defined("CMS_LOGIN") && !$skip_login) {
+    echo "Not found, redirecting";
   header("Location: " . URL . "login.php");
   exit();
 }
