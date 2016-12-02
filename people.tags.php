@@ -20,7 +20,7 @@ if ($_POST) {
   exit();
 }
 
-$list = $db->query("SELECT * FROM tags_options ORDER BY name");
+$list = $db->query("SELECT * FROM tags_options WHERE active = 1 ORDER BY name");
 
 $peopletags = $db->query("SELECT tag FROM people_tags WHERE people = $id");
 while ($row = $peopletags->fetch()) {
@@ -32,6 +32,13 @@ while ($row = $peopletags->fetch()) {
 <head>
 <title><?php echo $name ?> | Tags | <?php echo SITENAME ?></title>
 <?php echo $head ?>
+<script type="text/javascript" src="js/select2.min.js"></script>
+<link rel="stylesheet" href="css/select2.min.css" />
+<script type="text/javascript">
+$(function(){
+    $("select").select2();
+});
+</script>
 </head>
 <body>
 
