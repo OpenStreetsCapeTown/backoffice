@@ -12,6 +12,7 @@ if ($_POST) {
     'parent_event' => $_POST['parent_event'] ? (int)$_POST['parent_event'] : "NULL",
     'details' => html($_POST['details']),
     'type' => (int)$_POST['type'],
+    'location' => (int)$_POST['location'] ?: "NULL",
   );
   if ($id) {
     $db->update("events",$post,"id = $id");
@@ -25,6 +26,7 @@ if ($_POST) {
 
 $types = $db->query("SELECT * FROM event_types WHERE active = 1 ORDER BY name");
 $events = $db->query("SELECT * FROM events WHERE active = 1 ORDER BY date DESC");
+$locations = $db->query("SELECT * FROM locations WHERE active = 1 ORDER BY name");
 ?>
 <!doctype html>
 <html>
@@ -67,6 +69,18 @@ $events = $db->query("SELECT * FROM events WHERE active = 1 ORDER BY date DESC")
       <select name="type" class="form-control">
       <?php while ($row = $types->fetch()) { ?>
         <option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $info->type) { echo ' selected'; } ?>><?php echo $row['name'] ?></option>
+      <?php } ?>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Location</label>
+    <div class="col-sm-10">
+      <select name="location" class="form-control">
+        <option value=""></option>
+      <?php while ($row = $locations->fetch()) { ?>
+        <option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $info->location) { echo ' selected'; } ?>><?php echo $row['name'] ?></option>
       <?php } ?>
       </select>
     </div>

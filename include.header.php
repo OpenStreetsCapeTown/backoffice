@@ -41,6 +41,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogues <b class="caret"></b></a>
               <ul class="dropdown-menu">
+                <li><a href="standard/locations">Locations</a></li>
                 <li><a href="standard/skills">Skills</a></li>
                 <li><a href="standard/event">Events</a></li>
                 <li><a href="standard/types">Relationship types</a></li>

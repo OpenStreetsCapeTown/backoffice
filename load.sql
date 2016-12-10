@@ -554,3 +554,24 @@ ADD `description` text NULL;
 
 ALTER TABLE `event_relationships`
 ADD `description` text NULL;
+
+CREATE TABLE `locations` (
+  `id` int unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `active` int(1) unsigned NOT NULL
+) ENGINE='InnoDB' COLLATE 'utf8_unicode_ci';
+
+ALTER TABLE `locations`
+ADD INDEX `active` (`active`);
+
+ALTER TABLE `locations`
+CHANGE `id` `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+
+ALTER TABLE `locations`
+CHANGE `active` `active` int(1) unsigned NOT NULL DEFAULT '1' AFTER `name`;
+
+
+ALTER TABLE `events`
+ADD `location` int(10) unsigned NULL,
+ADD FOREIGN KEY (`location`) REFERENCES `locations` (`id`) ON DELETE CASCADE;

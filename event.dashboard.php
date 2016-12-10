@@ -60,7 +60,8 @@ footer{margin-top:30px}
   </h1>
   <p>
     <strong><?php echo $info->name ?></strong> | <?php echo format_date("M d, Y", $info->date) ?> | 
-    Event #<?php echo $id ?> | <a href="events/checklist/<?php echo $id ?>"><i class="fa fa-check"></i> Checklist</a>
+    Event #<?php echo $id ?> | <a href="events/checklist/<?php echo $id ?>"><i class="fa fa-check"></i> Checklist</a> | 
+    <a href="event.php?id=<?php echo $id ?>"><i class="fa fa-pencil"></i></a>
   </p>
 </div>
 
@@ -104,7 +105,9 @@ footer{margin-top:30px}
           View all contacts
         </a>
       </p>
-      <p class="movedown"><a href="people/search/<?php echo $id ?>" class="btn btn-primary">Add Contacts</a></p>
+      <p class="movedown"><a href="people/search/<?php echo $id ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Add Contacts</a>
+        <a href="event.import.php?id=<?php echo $id ?>" class="btn btn-primary"><i class="fa fa-database"></i> Import Contacts</a>
+      </p>
       <?php if ($info->active) { ?>
         <a href="event.dashboard.php?id=<?php echo $id ?>&amp;active=0" onclick="javascript:return confirm('Are you sure?')" class="btn btn-warning right">Archive Event</a>
       <?php } else { ?>

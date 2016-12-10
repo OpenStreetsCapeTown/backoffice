@@ -87,6 +87,11 @@ switch ($_GET['table']) {
     $label = 'Organization Main Types';
     $table_prefix = "";
     break;
+  case 'locations':
+    $table = 'locations';
+    $label = 'Locations';
+    $table_prefix = "";
+    break;
 }
 
 $table_name = $table . $table_prefix;
