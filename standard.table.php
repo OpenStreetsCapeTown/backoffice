@@ -74,6 +74,7 @@ switch ($_GET['table']) {
   case 'eventrelationships':
     $table = 'event_relationships';
     $label = 'Event Relationships';
+    $description = true;
     $table_prefix = "";
     break;
   case 'organizationtypes':

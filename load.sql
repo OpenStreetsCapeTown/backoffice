@@ -551,3 +551,6 @@ ADD `description` text NULL;
 
 ALTER TABLE `tags_options`
 ADD `description` text NULL;
+
+ALTER TABLE `event_relationships`
+ADD `description` text NULL;
