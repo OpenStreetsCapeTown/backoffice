@@ -545,3 +545,9 @@ CREATE TABLE `whiteboard_options` (
 
 
 -- 2015-08-29 09:27:57
+
+ALTER TABLE `types`
+ADD `description` text NULL;
+
+ALTER TABLE `tags_options`
+ADD `description` text NULL;

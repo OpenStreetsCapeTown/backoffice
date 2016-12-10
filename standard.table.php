@@ -35,6 +35,7 @@ switch ($_GET['table']) {
   case 'tags':
     $table = 'tags';
     $label = 'Tags';
+    $description = true;
     break;
   case 'mailinglist':
     $table = 'mailinglist';
@@ -58,6 +59,7 @@ switch ($_GET['table']) {
     $table = 'types';
     $label = 'Relationship Types';
     $table_prefix = "";
+    $description = true;
     break;
   // case 'donations':
   //   $table = 'donation_events';
@@ -105,6 +107,9 @@ if ($_POST) {
   }
   if ($table == "organization_types") {
     $post['main_organization'] = $_POST['main_organization'] ? (int)$_POST['main_organization'] : "NULL";
+  }
+  if ($description) {
+    $post['description'] = html($_POST['description']);
   }
   if ($id) {
     $db->update("$table_name",$post,"id = $id");
@@ -164,6 +169,8 @@ $mainorganizations = $db->query("SELECT * FROM organization_main_types WHERE act
   <?php if ($print) { echo "<div class=\"alert alert-success\">$print</div>"; } ?>
   <?php if ($error) { echo "<div class=\"alert alert-danger\">$error</div>"; } ?>
 
+  <?php if (!$id) { ?>
+
   <h1><?php echo $label ?> Options</h1>
 
   <table class="table table-striped">
@@ -174,12 +181,20 @@ $mainorganizations = $db->query("SELECT * FROM organization_main_types WHERE act
     </tr>
   <?php while ($row = $list->fetch()) { ?>
     <tr>
-      <td><?php echo $row['name'] ?></td>
+      <?php if ($description) { ?>
+        <td><strong><?php echo $row['name'] ?></strong>
+        <?php if ($row['description']) { ?><br /><?php echo $row['description'] ?><?php } ?>
+        </td>
+      <?php } else { ?>
+        <td><?php echo $row['name'] ?></td>
+      <?php } ?>
       <td><a href="standard/<?php echo $_GET['table'] ?>/edit/<?php echo $row['id'] ?>">Edit</a></td>
       <td><a href="standard/<?php echo $_GET['table'] ?>/delete/<?php echo $row['id'] ?>" onclick="javascript:return confirm('Are you sure?')">Delete</a></td>
     </tr>
   <?php $area[$row['id']] = $row['name']; } ?>
   </table>
+
+  <?php } ?>
 
   <h1><?php echo $id ? 'Edit' : 'Add' ?> <?php echo $label ?> Option</h1>
 
@@ -217,6 +232,15 @@ $mainorganizations = $db->query("SELECT * FROM organization_main_types WHERE act
       </div>
     </div>
 
+  <?php } ?>
+
+  <?php if ($description) { ?>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Description</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" name="description"><?php echo br2nl($info->description) ?></textarea>
+      </div>
+    </div>
   <?php } ?>
 
   <?php if ($table == "mailinglist" && $id) { ?>
