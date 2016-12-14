@@ -25,15 +25,26 @@ if ($_POST) {
     logThis(16, $contact);
   }
   $print = "Information was saved";
+
   if ($_GET['return'] == "profile") {
     header("Location: " . URL . "people/$contact");
+    exit();
+  }
+  if ($_GET['return']) {
+    header("Location: ".$_GET['return']);
     exit();
   }
 }
 
 $info = $db->query("SELECT * FROM people WHERE id = $contact");
 $eventinfo = $db->query("SELECT * FROM events WHERE id = $event");
-$relationships = $db->query("SELECT * FROM event_relationships WHERE active = 1 ORDER BY name");
+$relationships = $db->query("
+SELECT parent.name, parent.id, child.id AS child_id
+ FROM event_relationships parent
+LEFT JOIN event_relationships child ON parent.parent = child.id
+WHERE (child.active = 1 OR parent.active = 1)
+ORDER BY COALESCE(child.id, parent.id),  child.name
+");
 $details = $db->query("SELECT * FROM people_events WHERE people = $contact AND event = $event");
 $id = (int)$_GET['id'];
 if ($id) {
@@ -44,6 +55,7 @@ $events = $db->query("SELECT * FROM events WHERE active = 1 ORDER BY date DESC")
 if ($_GET['event'] && !$details->event) {
   $details->event = (int)$_GET['event'];
 }
+
 ?>
 <!doctype html>
 <html>
@@ -98,7 +110,8 @@ if ($_GET['event'] && !$details->event) {
       <select name="relationship" class="form-control" required>
         <option value=""></option>
         <?php while ($row = $relationships->fetch()) { ?>
-          <option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $details->relationship) { echo ' selected'; } ?>><?php echo $row['name'] ?></option>
+            <option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $details->relationship) { echo ' selected'; } ?>>
+            <?php echo $row['child_id'] ? " - " : ''; echo $row['name'] ?></option>
         <?php } ?>
       </select>
     </div>

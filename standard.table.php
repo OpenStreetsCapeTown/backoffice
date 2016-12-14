@@ -114,6 +114,9 @@ if ($_POST) {
   if ($table == "organization_types") {
     $post['main_organization'] = $_POST['main_organization'] ? (int)$_POST['main_organization'] : "NULL";
   }
+  if ($table == "event_relationships") {
+    $post['parent'] = $_POST['parent'] ? (int)$_POST['parent'] : "NULL";
+  }
   if ($description) {
     $post['description'] = html($_POST['description']);
   }
@@ -161,6 +164,7 @@ if ($_GET['action'] == "mailchimp") {
 }
 
 $mainorganizations = $db->query("SELECT * FROM organization_main_types WHERE active = 1 ORDER BY name");
+$event_relationships = $db->query("SELECT * FROM event_relationships WHERE active = 1 AND PARENT IS NULL ORDER BY name");
 ?>
 <!doctype html>
 <html>
@@ -233,6 +237,22 @@ $mainorganizations = $db->query("SELECT * FROM organization_main_types WHERE act
           <option value=""></option>
           <?php while ($row = $mainorganizations->fetch()) { ?>
             <option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $info->main_organization) { echo ' selected'; } ?>><?php echo $row['name'] ?></option>
+          <?php } ?>
+        </select>
+      </div>
+    </div>
+
+  <?php } ?>
+
+  <?php if ($table == "event_relationships") { ?>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Main Type</label>
+      <div class="col-sm-10">
+        <select name="parent" class="form-control">
+          <option value=""></option>
+          <?php while ($row = $event_relationships->fetch()) { ?>
+            <option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $info->parent) { echo ' selected'; } ?>><?php echo $row['name'] ?></option>
           <?php } ?>
         </select>
       </div>

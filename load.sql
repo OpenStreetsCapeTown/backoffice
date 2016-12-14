@@ -575,3 +575,9 @@ CHANGE `active` `active` int(1) unsigned NOT NULL DEFAULT '1' AFTER `name`;
 ALTER TABLE `events`
 ADD `location` int(10) unsigned NULL,
 ADD FOREIGN KEY (`location`) REFERENCES `locations` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `event_relationships`
+ADD `parent` int(10) unsigned NULL;
+
+ALTER TABLE `event_relationships`
+ADD FOREIGN KEY (`parent`) REFERENCES `event_relationships` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
