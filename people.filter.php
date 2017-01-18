@@ -479,6 +479,7 @@ td.short,th.short{width:70px}
     <th>Firstname</th>
     <th>Organization</th>
     <th>E-mail</th>
+    <th>Cell</th>
     <th class="short">View</th>
     <th class="short">Edit</th>
   </tr>
@@ -488,6 +489,7 @@ td.short,th.short{width:70px}
     <td><?php echo $row['firstname'] ?></td>
     <td><?php echo $row['organization'] ?></td>
     <td><?php echo $row['email']; $bcc .= $row['email'] . ";"; ?></td>
+    <td><?php echo $row['cell'] ?></td>
     <td class="short"><a href="people/<?php echo $row['id'] ?>">View</a></td>
     <td class="short"><a href="people.php?id=<?php echo $row['id'] ?>">Edit</a></td>
   </tr>
