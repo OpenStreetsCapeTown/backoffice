@@ -90,7 +90,8 @@ if ($_POST['sync']) {
   if ($good) {
     $print .= "A total of $good e-mail addresses were newly added to the Master list<br />";
   }
-  $show_response[] = $return;
+  $show_response['batch_subscribe'] = $batch_subscribe;
+  $show_response['add_information'] = $return;
   $bad = $return['errors'];
   if (count($bad)) {
     $error .= 'There were ' . count($bad) . ' errors adding people to the master list!<br />';
@@ -119,7 +120,10 @@ if ($_POST['sync']) {
   if ($good) {
     $print .= "A total of $good e-mail addresses were successfully synced";
   }
-  $show_response[] = $return;
+  $show_response['mailchimp_list'] = MAILCHIMP_LIST;
+  $show_response['seg_id'] = $segment;
+  $show_response['batch'] = $batch_subscribe;
+  $show_response['sync_information'] = $return;
   $bad = $return['errors'];
   if (count($bad)) {
     $error .= 'There were <strong>' . count($bad) . '</strong> errors adding people to this segment!<br />';
