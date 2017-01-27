@@ -90,6 +90,7 @@ if ($_POST['sync']) {
   if ($good) {
     $print .= "A total of $good e-mail addresses were newly added to the Master list<br />";
   }
+  $show_response[] = $return;
   $bad = $return['errors'];
   if (count($bad)) {
     $error .= 'There were ' . count($bad) . ' errors adding people to the master list!<br />';
@@ -118,6 +119,7 @@ if ($_POST['sync']) {
   if ($good) {
     $print .= "A total of $good e-mail addresses were successfully synced";
   }
+  $show_response[] = $return;
   $bad = $return['errors'];
   if (count($bad)) {
     $error .= 'There were <strong>' . count($bad) . '</strong> errors adding people to this segment!<br />';
@@ -417,8 +419,16 @@ td.short,th.short{width:70px}
 
 <?php } ?>
 
-<?php if ($_POST) { ?>
+<?php if ($_POST && !$_POST['debug']) { ?>
   <div class="alert alert-info"><?php echo (int)$list->num_rows ?> people found.</div>
+<?php } ?>
+
+<?php if ($_POST['debug']) { ?>
+  <div class="alert alert-info">
+    <pre>
+      <?php var_dump($show_response) ?>
+    </pre>
+  </div>
 <?php } ?>
 
 <?php if ($list->num_rows) { ?>
@@ -433,6 +443,7 @@ td.short,th.short{width:70px}
         <i class="glyphicon glyphicon-refresh"></i>
         Sync this segment
       </button>
+      <input type="checkbox" name="debug" value="1" /> Show detailed sync information
     </p>
     <?php while ($row = $list->fetch()) { ?>
       <input type="hidden" name="email[]" value="<?php echo $row['email'] ?>" />
